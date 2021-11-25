@@ -1,0 +1,94 @@
+.btn {
+    background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+    border: 0;
+    outline: 0;
+    color: $btn-main-color;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    @include mobile {
+        font-size: 1rem;
+    }
+
+    &__txt,
+    &__icon {
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    &__txt {
+        padding: 1rem 2rem;
+    }
+
+    &__icon {
+        @include flex(center, center);
+        font-size: 2rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        transform: translateX(-100%);
+    }
+
+    &-animate:hover &__txt {
+        transform: translateX(100%);
+    }
+
+    &-animate:hover &__icon {
+        transform: translateX(0);
+    }
+
+    &-sm {
+        font-size: 1rem;
+    }
+
+    &-sm &__txt {
+        padding: 0.7rem 1.5rem;
+    }
+
+    &-block {
+        width: 100%;
+    }
+}
+
+
+/* CSS */
+.button-37 {
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-37:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .button-37 {
+    padding: 10px 30px;
+  }
+}

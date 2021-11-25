@@ -1,0 +1,21 @@
+.section {
+    
+    margin-bottom: 80px;
+
+    & > * ~ * {
+        margin-top: 70px;
+    }
+
+    &__title {
+        background-color: lightskyblue;
+        color: black;
+        height:4rem;
+        font-size: 2rem;
+        text-transform: capitalize;
+        text-align: center;
+        padding-top: 12px;
+
+        box-shadow: $box-shadow;
+    }
+
+}
