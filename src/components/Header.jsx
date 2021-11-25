@@ -3,7 +3,10 @@ import React, { useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/images/Logo3.png'
 
+import Popup from './login/Popup';
+import Login from './login/Login';
 
+import {useState} from 'react';
 
 const mainNav = [
     {
@@ -22,7 +25,7 @@ const mainNav = [
         display: "Giao hàng",
         path: "/DeliveryPoli"
     },
-    
+
 ]
 
 const Header = () => {
@@ -49,13 +52,15 @@ const Header = () => {
 
     const menuToggle = () => menuLeft.current.classList.toggle('active')
 
+    const [buttonPopup, setButtonPopup] = useState(false);
+
     return (
         <div className="header" ref={headerRef}>
             <div className="container">
                 <div className="header__logo">
-                    
+
                     <Link to="/">
-                      
+
                         <img src={logo} alt="" />
                     </Link>
                 </div>
@@ -90,9 +95,12 @@ const Header = () => {
                                 <ShoppingBag/>
                             </Link>
                         </div>
-                        <div className="header__menu__item header__menu__right__item">
+                        <div onClick={() => setButtonPopup(true)} className="header__menu__item header__menu__right__item">
                                 <AccountCircle/>
                         </div>
+                        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                            <Login/>
+                        </Popup>
                     </div>
                 </div>
             </div>
