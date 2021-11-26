@@ -22,7 +22,7 @@ const ProductView1 = props => {
     const [descriptionExpand, setDescriptionExpand] = useState(false)
 
 
-    const [quantity, setQuantity] = useState(1)
+const [quantity, setQuantity] = useState(1)
 
     const updateQuantity = (type) => {
         if (type === 'plus') {
@@ -46,10 +46,11 @@ const ProductView1 = props => {
     const addToCart = () => {
         if (check()) {
             let newItem = {
-                slug: product.slug,
-              
+                slug: product.slug,  
                 price: product.price,
-                quantity: quantity
+                discount: product.discount,
+                quantity: quantity,
+                product,
             }
             if (dispatch(addItem(newItem))) {
                 alert('Success')
@@ -64,8 +65,11 @@ const ProductView1 = props => {
             let newItem = {
                 slug: product.slug,  
                 price: product.price,
-                quantity: quantity
+                discount: product.discount,
+                quantity: quantity,
+                product,
             }
+            console.log('produc2t', newItem);
             if (dispatch(addItem(newItem))) {
                 dispatch(remove())
                 props.history.push('/cart')
@@ -76,6 +80,7 @@ const ProductView1 = props => {
     }
 
     if (!product) return null;
+    console.log('Number(product.price) * (1 - Number(product.discount)/100)', Number(product.price) * (1 - Number(product.discount)/100));
     return (
         <div className="product">
             <div className="product__images">
@@ -110,7 +115,7 @@ const ProductView1 = props => {
                 ?
                     <div className="product__info__item">
                         <span className="product__info__item__price">
-                            {numberWithCommas(product.price * (100 - product.discount))}
+                            {numberWithCommas(Number(product.price) * (1 - Number(product.discount)/100))}
                         </span>
                         <span className="product-card__price__old">
                             <del>{numberWithCommas(product.price)}</del>
