@@ -30,7 +30,7 @@ const ProductCard1 = ({
                 {product?.discount
                 ?
                     <div className="product-card__price">
-                        {numberWithCommas(product.price * (100 - product.discount))}
+                        {numberWithCommas(Number(product.price) * (1 - Number(product.discount)/100))}
                         <span className="product-card__price__old">
                             <del>{numberWithCommas(product.price)}</del>
                         </span>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { useDispatch } from 'react-redux'
@@ -8,46 +8,37 @@ import numberWithCommas from '../utils/numberWithCommas'
 import { Link } from 'react-router-dom'
 
 const CartItem = props => {
+    const { item } = props;
+    const { quantity = 0 } = item ?? {};
 
     const dispatch = useDispatch()
 
     const itemRef = useRef(null)
 
-    const [item, setItem] = useState(props.item)
-    const [quantity, setQuantity] = useState(props.item.quantity)
+    console.log('item', item);
 
-    useEffect(() => {
-        setItem(props.item)
-        setQuantity(props.item.quantity)
-    }, [props.item])
-
-    const updateQuantity = (opt) => {
-        if (opt === '+') {
+    const updateQuantity = (shouldAddUp) => {
+        if (shouldAddUp) {
             dispatch(updateItem({...item, quantity: quantity + 1}))
-        }
-        if (opt === '-') {
-            dispatch(updateItem({...item, quantity: quantity - 1 === 0 ? 1 : quantity - 1}))
+        } else {
+            dispatch(updateItem({...item, quantity: quantity - 1}))
         }
     }
 
-    // const updateCartItem = () => {
-    //     dispatch(updateItem({...item, quantity: quantity}))
-    // }
-
     const removeCartItem = () => {
-        console.log('removeCartItem')
         dispatch(removeItem(item))
     }
 
+    if (!item) return null;
     return (
         <div className="cart__item" ref={itemRef}>
             <div className="cart__item__image">
-                <img src={item.product.image01} alt="" />
+                {item?.product?.image01 && <img src={item.product.image01} alt="" />}
             </div>
             <div className="cart__item__info">
                 <div className="cart__item__info__name">
-                    <Link to={`/catalog/${item.slug}`}>
-                        {`${item.product.title} - ${item.color} - ${item.size}`}
+                    <Link to={`/catalog/${encodeURIComponent(item.slug ?? '')}`}>
+                        {`${item.product.name}`}
                     </Link>
                 </div>
                 <div className="cart__item__info__price">
@@ -55,13 +46,13 @@ const CartItem = props => {
                 </div>
                 <div className="cart__item__info__quantity">
                     <div className="product__info__item__quantity">
-                        <div className="product__info__item__quantity__btn" onClick={() => updateQuantity('-')}>
+                        <div className="product__info__item__quantity__btn" onClick={() => updateQuantity(false)}>
                             <i className="bx bx-minus"></i>
                         </div>
                         <div className="product__info__item__quantity__input">
                             {quantity}
                         </div>
-                        <div className="product__info__item__quantity__btn" onClick={() => updateQuantity('+')}>
+                        <div className="product__info__item__quantity__btn" onClick={() => updateQuantity(true)}>
                             <i className="bx bx-plus"></i>
                         </div>
                     </div>

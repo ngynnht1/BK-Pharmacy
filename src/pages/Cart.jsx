@@ -10,21 +10,24 @@ import Button from '../components/Button'
 import productData1 from '../assets/fake-data/product-1'
 import numberWithCommas from '../utils/numberWithCommas'
 
+import {
+    selectCart,
+    selectCartTotalProduct,
+    selectCartTotalAmount,
+} from '../redux/shopping-cart/selectors';
 const Cart = () => {
 
-    const cartItems = useSelector((state) => state.cartItems.value)
+    const cartProducts = useSelector(selectCart)
+    const totalProducts = useSelector(selectCartTotalProduct)
+    const totalPrice = useSelector(selectCartTotalAmount)
 
-    const [cartProducts, setCartProducts] = useState(productData1.getCartItemsInfo1(cartItems))
+    // const [cartProducts, setCartProducts] = useState(productData1.getCartItemsInfo1(cartItems))
 
-    const [totalProducts, setTotalProducts] = useState(0)
-
-    const [totalPrice, setTotalPrice] = useState(0)
-
-    useEffect(() => {
-        setCartProducts(productData1.getCartItemsInfo1(cartItems))
-        setTotalPrice(cartItems.reduce((total, item) => total + (Number(item.quantity) * Number(item.price)), 0))
-        setTotalProducts(cartItems.reduce((total, item) => total + Number(item.quantity), 0))
-    }, [cartItems])
+    // useEffect(() => {
+    //     setCartProducts(productData1.getCartItemsInfo1(cartItems))
+    //     setTotalPrice(cartItems.reduce((total, item) => total + (Number(item.quantity) * Number(item.price)), 0))
+    //     setTotalProducts(cartItems.reduce((total, item) => total + Number(item.quantity), 0))
+    // }, [cartItems])
 
     return (
         <Helmet title="Giỏ hàng">
