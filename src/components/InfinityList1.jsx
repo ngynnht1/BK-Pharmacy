@@ -18,15 +18,16 @@ const InfinityList = props => {
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
-        setData(props.data.slice(0, perLoad))
-        setIndex(1)
+        if (props.data) {
+            setData(props.data.slice(0, perLoad))
+            setIndex(1)
+        }
     }, [props.data])
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
             if (listRef && listRef.current) {
                 if (window.scrollY + window.innerHeight >= listRef.current.clientHeight + listRef.current.offsetTop + 200) {
-                    console.log("bottom reach")
                     setLoad(true)
                 }
             }
@@ -60,13 +61,10 @@ const InfinityList = props => {
                 gap={20}
             >
                 {
-                    data.map((item, index) => (
+                    data?.map((item, index) => (
                         <ProductCard1
                             key={index}
-                            img01={item.image01}
-                            img02={item.image02}
-                            name={item.title}
-                            price={Number(item.price)}
+                            product={item}
                             slug={item.slug}
                         />
                     ))
