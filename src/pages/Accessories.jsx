@@ -1,38 +1,56 @@
-import React, { useCallback, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { useSelector } from "react-redux";
 
 import Helmet from '../components/Helmet'
 import CheckBox from '../components/CheckBox'
-
+import { useDispatch } from 'react-redux';
 
 import Button from '../components/Button'
 
-import productData1 from '../assets/fake-data/product-1'
 import InfinityList1 from '../components/InfinityList1'
-import brand from '../assets/fake-data/product-brand'
-import category_copy from '../assets/fake-data/category_copy'
 import { Breadcrumbs } from '@mui/material'
+import {
+    fetchCategories,
+    fetchBrands,
+    fetchProducts,
+} from '../redux/data/actions'
 
 const Accessories = () => {
+
+    const dispatch = useDispatch();
 
     const initFilter = {
         category: [],
         brand: [],
     }
 
-    const productList = productData1.getAllProducts1()
+    const categories = useSelector(state => state.data.categories)
+    const brands = useSelector(state => state.data.brands)
+    const products = useSelector(state => state.data.products) ?? []
 
-    const [products, setProducts] = useState(productList)
 
     const [filter, setFilter] = useState(initFilter)
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+        dispatch(fetchBrands());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(fetchProducts(
+            filter.category,
+            filter.brand,
+        ))
+    }, [dispatch, filter]);
 
     const filterSelect = (type, checked, item) => {
         if (checked) {
             switch(type) {
                 case "CATEGORY":
-                    setFilter({...filter, category: [...filter.category, item.categorySlug]})
+                    setFilter({...filter, category: [...filter.category, item.id]})
                     break
                 case "BRAND":
-                    setFilter({...filter, brand: [...filter.brand, item.brand]})
+                    setFilter({...filter, brand: [...filter.brand, item.id]})
                     break
          
                 default:
@@ -40,11 +58,11 @@ const Accessories = () => {
         } else {
             switch(type) {
                 case "CATEGORY":
-                    const newCategory = filter.category.filter(e => e !== item.categorySlug)
+                    const newCategory = filter.category.filter(e => e !== item.id)
                     setFilter({...filter, category: newCategory})
                     break
                 case "BRAND":
-                    const newBrand = filter.brand.filter(e => e !== item.brand)
+                    const newBrand = filter.brand.filter(e => e !== item.id)
                     setFilter({...filter, brand: newBrand})
                     break
          
@@ -54,32 +72,6 @@ const Accessories = () => {
     }
 
     const clearFilter = () => setFilter(initFilter)
-
-    const updateProducts = useCallback(
-        () => {
-            let temp = productList
-
-            if (filter.category.length > 0) {
-                temp = temp.filter(e => filter.category.includes(e.categorySlug))
-            }
-
-            if (filter.brand.length > 0) {
-                temp = temp.filter(e => {
-                    const check = e.brand.find(brand => filter.brand.includes(brand))
-                    return check !== undefined
-                })
-            }
-
-        
-
-            setProducts(temp)
-        },
-        [filter, productList],
-    )
-
-    useEffect(() => {
-        updateProducts()
-    }, [updateProducts])
 
     const filterRef = useRef(null)
 
@@ -100,12 +92,12 @@ const Accessories = () => {
                         </div>
                         <div className="catalog__filter__widget__content">
                             {
-                                category_copy.map((item, index) => (
+                                categories.map((item, index) => (
                                     <div key={index} className="catalog__filter__widget__content__item">
                                         <CheckBox
-                                            label={item.display}
+                                            label={item.name}
                                             onChange={(input) => filterSelect("CATEGORY", input.checked, item)}
-                                            checked={filter.category.includes(item.categorySlug)}
+                                            checked={filter.category.includes(item.id)}
                                         />
                                     </div>
                                 ))
@@ -119,12 +111,12 @@ const Accessories = () => {
                         </div>
                         <div className="catalog__filter__widget__content">
                             {
-                                brand.map((item, index) => (
+                                brands.map((item, index) => (
                                     <div key={index} className="catalog__filter__widget__content__item">
                                         <CheckBox
-                                            label={item.display}
+                                            label={item.name}
                                             onChange={(input) => filterSelect("BRAND", input.checked, item)}
-                                            checked={filter.brand.includes(item.brand)}
+                                            checked={filter.brand.includes(item.id)}
                                         />
                                     </div>
                                 ))

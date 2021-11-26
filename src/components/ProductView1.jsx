@@ -15,20 +15,9 @@ const ProductView1 = props => {
 
     const dispatch = useDispatch()
 
-    let product = props.product
+    const { product } = props;
 
-    if (product === undefined) product = {
-        title: "",
-        price: '',
-        image01: null,
-        image02: null,
-        categorySlug: "",
-        brand: [],
-        slug: "",
-        description: ""
-    }
-
-    const [previewImg, setPreviewImg] = useState(product.image01)
+    const [previewImg, setPreviewImg] = useState(product?.image01)
 
     const [descriptionExpand, setDescriptionExpand] = useState(false)
 
@@ -44,15 +33,13 @@ const ProductView1 = props => {
     }
 
     useEffect(() => {
-        setPreviewImg(product.image01)
-        setQuantity(1)
-       
+        if (product) {
+            setPreviewImg(product.image01)
+            setQuantity(1)
+        }
     }, [product])
 
     const check = () => {
-
-   
-
         return true
     }
 
@@ -88,6 +75,7 @@ const ProductView1 = props => {
         }
     }
 
+    if (!product) return null;
     return (
         <div className="product">
             <div className="product__images">
@@ -117,12 +105,24 @@ const ProductView1 = props => {
                 </div>
             </div>
             <div className="product__info">
-                <h1 className="product__info__title">{product.title}</h1>
-                <div className="product__info__item">
-                    <span className="product__info__item__price">
-                        {numberWithCommas(product.price)}
-                    </span>
-                </div>
+                <h1 className="product__info__title">{product.name}</h1>
+                {product?.discount
+                ?
+                    <div className="product__info__item">
+                        <span className="product__info__item__price">
+                            {numberWithCommas(product.price * (100 - product.discount))}
+                        </span>
+                        <span className="product-card__price__old">
+                            <del>{numberWithCommas(product.price)}</del>
+                        </span>
+                    </div>
+                :
+                    <div className="product__info__item">
+                        <span className="product__info__item__price">
+                            {numberWithCommas(product.price)}
+                        </span>
+                    </div>
+                }
           
           
                 <div className="product__info__item">

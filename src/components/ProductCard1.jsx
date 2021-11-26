@@ -11,33 +11,44 @@ import Button from './Button'
 
 import numberWithCommas from '../utils/numberWithCommas'
 
-const ProductCard1 = props => {
+const ProductCard1 = ({
+    slug,
+    product,
+}) => {
 
     const dispatch = useDispatch()
 
     return (
         <div className="product-card">
-            <Link to={`/accessories/${props.slug}`}>
+            <Link to={`/accessories/${product?.slug ? encodeURIComponent(product.slug) : ''}`}>
                 <div className="product-card__image">
-                    <img src={props.img01} alt="" />
-                    <img src={props.img02} alt="" />
+                    {product?.image01 && <img src={product.image01} alt="" />}
+                    {product?.image02 && <img src={product.image02} alt="" />}
+                    {product?.image03 && <img src={product.image03} alt="" />}
                 </div>
-                <h3 className="product-card__name">{props.name}</h3>
-                <div className="product-card__price">
-                    {numberWithCommas(props.price)}
-                    <span className="product-card__price__old">
-                        <del>{numberWithCommas(399000)}</del>
-                    </span>
-                </div>
+                <h3 className="product-card__name">{product?.name ?? ''}</h3>
+                {product?.discount
+                ?
+                    <div className="product-card__price">
+                        {numberWithCommas(product.price * (100 - product.discount))}
+                        <span className="product-card__price__old">
+                            <del>{numberWithCommas(product.price)}</del>
+                        </span>
+                    </div>
+                :
+                    <div className="product-card__price">
+                        {numberWithCommas(product?.price ?? 0)}
+                    </div>
+                }
             </Link>
             <div className="product-card__btn">
                 <Button
                     size="sm"    
                     icon="bx bx-cart"
                     animate={true}
-                    onClick={() => dispatch(set(props.slug))}
+                    onClick={() => product?.slug && dispatch(set(encodeURIComponent(product.slug)))}
                 >
-                    chọn mua
+                    Chọn mua
                 </Button>
             </div>
         </div>
@@ -50,6 +61,7 @@ ProductCard1.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     slug: PropTypes.string.isRequired,
+    product: PropTypes.object.isRequired,
 }
 
 export default ProductCard1

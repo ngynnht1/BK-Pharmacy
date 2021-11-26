@@ -8,19 +8,25 @@ import Button from './Button'
 
 import { remove } from '../redux/product-modal/productModalSlice'
 
-import productData1 from '../assets/fake-data/product-1'
+// import productData1 from '../assets/fake-data/product-1'
 import ProductView1 from './ProductView1'
+
+import {
+    selectProductBySlug,
+} from '../redux/data/selectors';
 
 const ProductViewModal1 = () => {
 
     const productSlug = useSelector((state) => state.productModal.value)
+    const product = useSelector(selectProductBySlug(productSlug))
     const dispatch = useDispatch()
 
-    const [product, setProduct] = useState(undefined)
+    // const [product, setProduct] = useState(undefined)
 
-    useEffect(() => {
-        setProduct(productData1.getProductBySlug1(productSlug))
-    }, [productSlug]);
+    // useEffect(() => {
+    //     console.log('productSlug', productSlug);
+    //     setProduct(productData1.getProductBySlug1(productSlug))
+    // }, [productSlug]);
 
     return (
         <div className={`product-view__modal ${product === undefined ? '' : 'active'}`}>
