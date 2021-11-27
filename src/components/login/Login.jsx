@@ -84,6 +84,10 @@ function RegisterForm() {
       <label for="password">password</label>
       <input type="text" id="password" />
       <label for="confirmpassword">confirm password</label>
+      <input type="text" id="confirmpaddress" />
+      <label for="confirmphone">Số điện thoại liên lạc</label>
+      <input type="text" id="confirmphone" />
+      <label for="confirmaddress">Thông tin địa chỉ</label>
       <input type="text" id="confirmpassword" />
       <input type="submit" value="submit" class="submit" />
     </React.Fragment>

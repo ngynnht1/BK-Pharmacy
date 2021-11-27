@@ -40,7 +40,7 @@ const Cart1 = () => {
                         </div>
                     </div>
                     <div className="cart__info__btn">
-                        <Button size="block">
+                        <Button to="/Bill" size="block">
                             Đặt hàng
                         </Button>
                         <Link to="/catalog">
@@ -48,7 +48,7 @@ const Cart1 = () => {
                                 Tiếp tục mua hàng
                             </Button>
                         </Link>
-                        
+
                     </div>
                 </div>
                 <div className="cart__list">
