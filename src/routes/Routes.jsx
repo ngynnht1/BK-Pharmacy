@@ -10,6 +10,9 @@ import DeliveryPoli from '../pages/DeliveryPoli'
 import Accessories from '../pages/Accessories'
 import Product1 from '../pages/Product1'
 import Introduction from '../pages/Introduction'
+import Bill from '../components/Bill'
+
+
 
 const Routes = () => {
     return (
@@ -20,6 +23,8 @@ const Routes = () => {
             <Route path='/cart' component={Cart}/>
             <Route path='/accessories' component={Accessories}/>
             <Route path='/accessories/:slug' component={Product1}/>
+            <Route path='/Bill' component={Bill}/>
+
         </Switch>
     )
 }
