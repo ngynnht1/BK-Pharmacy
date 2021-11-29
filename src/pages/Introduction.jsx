@@ -9,7 +9,8 @@ function Introduction() {
       <img src={introduction} alt=""/>
     </div>
     <h1 className="section__title">Về chúng tôi</h1>
-    <text>
+    <text className="info">
+      <br/><br/>
       Được thành lập vào tháng 10/2021, Bách Khoa Pharmacity là một trong những chuỗi  là một trong những chuỗi nhà thuốc bán lẻ hiện đại đầu tiên tại thị trường Việt Nam, luôn luôn hướng đến mục tiêu nâng cao chất lượng chăm sóc sức khỏe cho từng khách hàng.
       <br/><br/>
       Điều này, trước đây vốn chỉ nằm trong ý tưởng của ông Chris Blank – nhà sáng lập công ty, một dược sỹ người Mỹ làm việc nhiều năm tại Việt Nam. Với niềm đam mê và sự sáng tạo của mình, ông Chris Blank đã thành lập nên Pharmacity và mang đến những trải nghiệm tốt nhất cho khách hàng.

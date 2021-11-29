@@ -10,6 +10,9 @@ import Button from '../components/Button';
 import productData1 from '../assets/fake-data/product-1';
 import numberWithCommas from '../utils/numberWithCommas';
 
+import Popup from '../components/login/Popup';
+import Login from '../components/login/Login';
+
 import {
   selectCart,
   selectCartTotalProduct,
@@ -20,6 +23,7 @@ const Cart = () => {
   const totalProducts = useSelector(selectCartTotalProduct);
   const totalPrice = useSelector(selectCartTotalAmount);
 
+  const [buttonPopup, setButtonPopup] = useState(false);
   // const [cartProducts, setCartProducts] = useState(productData1.getCartItemsInfo1(cartItems))
 
   // useEffect(() => {
@@ -35,9 +39,17 @@ const Cart = () => {
           <div className="__deliver">
             <h1>Thông tin giao hàng</h1>
             <div className="cart__info__account">
-              <h3>Bạn đã có tài khoảng?</h3>
+              <h3>Bạn đã có tài khoản?</h3>
+
+              <div onClick={() => setButtonPopup(true)}  >
               <h3 className="cart__info__account__login">Đăng nhập</h3>
+              </div>
+              <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                  <Login/>
+              </Popup>
+
             </div>
+
             {/* <form className=""> */}
               <input size="block"
                 className="cart__info__frame"
