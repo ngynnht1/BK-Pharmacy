@@ -1,4 +1,4 @@
-import { AccountCircle, Search, ShoppingBag } from '@mui/icons-material'
+import { AccountCircle, ContactPage, Search, ShoppingBag } from '@mui/icons-material'
 import React, { useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/images/Logo3.png'
@@ -90,17 +90,25 @@ const Header = () => {
                         <div className="header__menu__item header__menu__right__item">
                                 <Search/>
                         </div>
+
                         <div className="header__menu__item header__menu__right__item">
                             <Link to="/cart">
                                 <ShoppingBag/>
                             </Link>
                         </div>
+
                         <div onClick={() => setButtonPopup(true)} className="header__menu__item header__menu__right__item">
                                 <AccountCircle/>
                         </div>
                         <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
                             <Login/>
                         </Popup>
+
+                        <div className="header__menu__item header__menu__right__item">
+                            <Link to="/Profile">
+                                <ContactPage/>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

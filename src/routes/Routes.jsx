@@ -11,7 +11,7 @@ import Accessories from '../pages/Accessories'
 import Product1 from '../pages/Product1'
 import Introduction from '../pages/Introduction'
 import Bill from '../components/Bill'
-
+import Profile from '../components/Profile'
 
 
 const Routes = () => {
@@ -24,6 +24,8 @@ const Routes = () => {
             <Route path='/accessories' component={Accessories}/>
             <Route path='/accessories/:slug' component={Product1}/>
             <Route path='/Bill' component={Bill}/>
+            <Route path='/Profile' component={Profile}/>
+
 
         </Switch>
     )
