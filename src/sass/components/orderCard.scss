@@ -1,0 +1,49 @@
+.container{
+
+  &__orderid{
+    margin-top:15rem;
+    display:flex;
+    font-size:1.8rem;
+
+    &__title,
+    &__title__value,
+    &__date,
+    &__date__value {
+      padding-right: 5px;
+    }
+  }
+
+  &__backToAccount{
+    font-size: 1.5rem;
+    color:blue;
+    padding:20px 20px 0 0px;
+    cursor:pointer;
+  }
+
+  &__delivery{
+    display:flex;
+    padding:20px 20px 50px 0;
+    font-size:1.5rem;
+
+
+    &__from{
+      padding-right:30rem;
+
+        p {
+        display:inline;
+      }
+    }
+
+    &__to{
+        p {
+        display:inline;
+      }
+    }
+  }
+}
+
+.name{
+  padding:10px;
+  font-size:1.5rem;
+ }
+

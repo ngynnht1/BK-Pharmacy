@@ -1,5 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
+import { Link} from 'react-router-dom'
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -64,12 +65,15 @@ export default function CustomizedTables() {
             <StyledTableCell align="right">Tổng tiền</StyledTableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
-          {rows.map((row) => (
+        {rows.map((row) => (
             <StyledTableRow key={row.name}>
-                <div component="th" scope="row" className="id" >
-                  {row.name}
-                </div>
+            <Link to="/OrderCard">
+              <div className="id" component="th" scope="row">
+                {row.name}
+              </div>
+              </Link>
 
               <StyledTableCell align="right">{row.date}</StyledTableCell>
               <StyledTableCell align="right">{row.typepayment}</StyledTableCell>
@@ -83,7 +87,9 @@ export default function CustomizedTables() {
 
     <h1 className="title">Quang Nguyễn</h1>
     <div type="email" className="email"> quang.nguyenkhmt@gmail.com </div>
-    <div className="address">Xem địa chỉ</div>
+    <Link to="/Cart">
+      <div className="address">Xem địa chỉ</div>
+    </Link>
 </div>
 );
 }
