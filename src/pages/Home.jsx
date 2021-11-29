@@ -49,7 +49,7 @@ const Home = () => {
             {/* best selling section */}
             <Section>
                 <SectionTitle>
-                    top sản phẩm bán chạy trong tuần
+                    Top sản phẩm bán chạy trong tuần
                 </SectionTitle>
                 <SectionBody>
                     <Grid
@@ -116,7 +116,7 @@ const Home = () => {
             {/* popular product section */}
             <Section>
                 <SectionTitle>
-                    phổ biến
+                    Phổ biến
                 </SectionTitle>
                 <SectionBody>
                     <Grid
