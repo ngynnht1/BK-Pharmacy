@@ -8,8 +8,25 @@ import Footer from './Footer'
 
 import Routes from '../routes/Routes'
 import ProductViewModal1 from './ProductViewModal1'
+import { useEffect } from 'react';
+import {
+    getCookie,
+} from '../utils/localStorageHelper';
+import { useDispatch } from 'react-redux'
+import { validateJWTAction } from '../redux/authentication/actions'
 
 const Layout = () => {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const jwt = getCookie('jwt');
+        if (jwt && jwt !== '') {
+            console.log('jwt', jwt);
+            dispatch(validateJWTAction(jwt));
+        }
+    }, [dispatch]);
+
     return (
         <BrowserRouter>
             <Route render={props => (

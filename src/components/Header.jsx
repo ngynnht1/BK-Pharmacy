@@ -1,5 +1,5 @@
 import { AccountCircle, ContactPage, Search, ShoppingBag } from '@mui/icons-material'
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/images/Logo3.png'
 
@@ -7,6 +7,10 @@ import Popup from './login/Popup';
 import Login from './login/Login';
 
 import {useState} from 'react';
+import { useSelector } from 'react-redux';
+import {
+    selectUserInfo,
+} from '../redux/authentication/selectors';
 
 const mainNav = [
     {
@@ -34,6 +38,9 @@ const Header = () => {
     const activeNav = mainNav.findIndex(e => e.path === pathname)
 
     const headerRef = useRef(null)
+    const {
+        user,
+    } = useSelector(selectUserInfo);
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -44,7 +51,7 @@ const Header = () => {
             }
         })
         return () => {
-            window.removeEventListener("scroll")
+            window.removeEventListener("scroll",  null);
         };
     }, []);
 
@@ -53,6 +60,14 @@ const Header = () => {
     const menuToggle = () => menuLeft.current.classList.toggle('active')
 
     const [buttonPopup, setButtonPopup] = useState(false);
+
+    const onUserIconTapped = useCallback(() => {
+        if (user) {
+            console.log('user logged in');
+        } else {
+            setButtonPopup(true);
+        }
+    }, [user]);
 
     return (
         <div className="header" ref={headerRef}>
@@ -97,18 +112,21 @@ const Header = () => {
                             </Link>
                         </div>
 
-                        <div onClick={() => setButtonPopup(true)} className="header__menu__item header__menu__right__item">
-                                <AccountCircle/>
-                        </div>
+                        {user
+                        ?
+                            <div className="header__menu__item header__menu__right__item">
+                                <Link to="/Profile">
+                                    <ContactPage/>
+                                </Link>
+                            </div>
+                        :
+                            <div onClick={onUserIconTapped} className="header__menu__item header__menu__right__item">
+                                    <AccountCircle/>
+                            </div>                            
+                        }
                         <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
                             <Login/>
                         </Popup>
-
-                        <div className="header__menu__item header__menu__right__item">
-                            <Link to="/Profile">
-                                <ContactPage/>
-                            </Link>
-                        </div>
                     </div>
                 </div>
             </div>
