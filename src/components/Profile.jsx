@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import { Link} from 'react-router-dom'
 import Table from "@mui/material/Table";
@@ -8,7 +8,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-
+import { useDispatch } from 'react-redux'
+import {
+  logoutAction
+} from '../redux/authentication/actions';
+import { useSelector } from 'react-redux';
+import {
+  selectUserInfo,
+} from '../redux/authentication/selectors';
+import { useHistory } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -49,11 +57,30 @@ const rows = [
 ];
 
 export default function CustomizedTables() {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const {
+    jwt,
+  } = useSelector(selectUserInfo);
+
+  useEffect(() => {
+    if (!jwt) {
+      history.push("/");
+    }
+  }, [history, jwt])
+
+  const onLogout = useCallback(() => {
+    console.log('1');
+    dispatch(logoutAction())
+  }, [dispatch]);
+
   return (
-<div className="container">
-  <TableContainer component={Paper}>
-      <div className="title">Tài khoản của bạn</div>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+    <div className="container">
+      <TableContainer component={Paper}>
+        <div className="title">Tài khoản của bạn</div>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell className="id">Mã đơn hàng</StyledTableCell>
@@ -75,21 +102,23 @@ export default function CustomizedTables() {
               </div>
               </Link>
 
-              <StyledTableCell align="right">{row.date}</StyledTableCell>
-              <StyledTableCell align="right">{row.typepayment}</StyledTableCell>
-              <StyledTableCell align="right">{row.deliver}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                  <StyledTableCell align="right">{row.date}</StyledTableCell>
+                  <StyledTableCell align="right">{row.typepayment}</StyledTableCell>
+                  <StyledTableCell align="right">{row.deliver}</StyledTableCell>
+                  <StyledTableCell align="right">{row.price}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-    <h1 className="title">Quang Nguyễn</h1>
-    <div type="email" className="email"> quang.nguyenkhmt@gmail.com </div>
-    <Link to="/Cart">
-      <div className="address">Xem địa chỉ</div>
-    </Link>
-</div>
-);
+        <h1 className="title">Quang Nguyễn</h1>
+        <div type="email" className="email"> quang.nguyenkhmt@gmail.com </div>
+        {/* <div className="address">Xem địa chỉ</div> */}
+        <Link to="/Cart">
+          <div className="address">Xem địa chỉ</div>
+        </Link>
+        <div onClick={onLogout} className="address">Đăng xuất</div>
+    </div>
+  );
 }

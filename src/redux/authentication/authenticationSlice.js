@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {
+  setCookie,
+} from '../../utils/localStorageHelper';
 
 const initialState = {
   jwt: undefined,
@@ -19,6 +22,7 @@ export const authenticationSlice = createSlice({
       },
       getUserSuccess: (state, action) => {
         const { data } = action.payload;
+        setCookie('jwt', data?.jwt, 1);
         state.jwt = data?.jwt;
         state.user = data?.user;
         state.loadingUser = false;
@@ -41,6 +45,21 @@ export const authenticationSlice = createSlice({
         const { error } = action.payload;
         state.creatingUser = false;
         state.createUserError = error;
+      },
+      validateJWTSuccess: (state, action) => {
+        const { user, jwt } = action.payload;
+        state.user = user;
+        state.jwt = jwt;
+      },
+      validateJTWError: (state, _action) => {
+        state.user = undefined;
+        state.jwt = undefined;
+        setCookie('jwt', '', 1);
+      },
+      logoutSuccess: (state, action) => {
+        state.user = undefined;
+        state.jwt = undefined;
+        setCookie('jwt', '', 1);
       }
     },
 })
@@ -53,6 +72,9 @@ export const {
   createUser,
   createUserSuccess,
   createUserError,
+  validateJTWError,
+  validateJWTSuccess,
+  logoutSuccess,
 } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./Login.css";
 import { useSpring, animated } from "react-spring";
+import { useDispatch } from 'react-redux'
+import { loginAction, signupAction } from "../../redux/authentication/actions";
 
 function Login() {
   const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
@@ -48,12 +50,8 @@ function Login() {
         </animated.button>
       </div>
       <div className="form-group">
-        <animated.form action="" id="loginform" style={loginProps}>
-          <LoginForm />
-        </animated.form>
-        <animated.form action="" id="registerform" style={registerProps}>
-          <RegisterForm />
-        </animated.form>
+        <LoginForm style={loginProps} />
+        <RegisterForm style={registerProps} />
       </div>
       <animated.div className="forgot-panel" style={loginProps}>
         {/* <a herf="#">Forgot your password</a> */}
@@ -62,35 +60,147 @@ function Login() {
   );
 }
 
-function LoginForm() {
+function LoginForm({ style }) {
+
+  const dispatch = useDispatch();
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  }
+
+  const onHandleSubmit = useCallback((event) => {
+    event.preventDefault();
+    dispatch(loginAction(email, password));
+  }, [dispatch, email, password]);
+
   return (
-    <React.Fragment>
+    <animated.form
+      id="loginform"
+      style={style}
+      onSubmit={onHandleSubmit}
+    >
       <label for="username">USERNAME</label>
-      <input type="text" id="username" />
+      <input
+        type="text"
+        id="username"
+        value={email}
+        onChange={onChangeEmail}
+      />
       <label for="password">PASSWORD</label>
-      <input type="text" id="password" />
+      <input
+        type="password"
+        id="password"
+        value={password}
+        onChange={onChangePassword}
+      />
       <input type="submit" value="submit" className="submit" />
-    </React.Fragment>
+    </animated.form>
   );
 }
 
-function RegisterForm() {
+function RegisterForm({ style }) {
+
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+
+  const onChangeName = (event) => {
+    setName(event.target.value);
+  }
+
+  const onChangeEmail = (event) => {
+    setEmail(event.target.value);
+  }
+
+  const onChangePassword = (event) => {
+    setPassword(event.target.value);
+  }
+
+  const onChangeConfirmPassword = (event) => {
+    setConfirmPassword(event.target.value);
+  }
+
+  const onChangePhone = (event) => {
+    setPhone(event.target.value);
+  }
+
+  const onChangeAddress = (event) => {
+    setAddress(event.target.value);
+  }
+
+  const onHandleSubmit = useCallback((event) => {
+    event.preventDefault();
+    dispatch(signupAction(
+      name,
+      email,
+      password,
+      phone,
+      address,
+    ));
+  }, [dispatch, name, email, password, phone, address]);
+
   return (
-    <React.Fragment>
-      <label for="fullname">full name</label>
-      <input type="text" id="fullname" />
-      <label for="email">email</label>
-      <input type="text" id="email" />
-      <label for="password">password</label>
-      <input type="text" id="password" />
-      <label for="confirmpassword">confirm password</label>
-      <input type="text" id="confirmpaddress" />
-      <label for="confirmphone">Số điện thoại liên lạc</label>
-      <input type="text" id="confirmphone" />
-      <label for="confirmaddress">Thông tin địa chỉ</label>
-      <input type="text" id="confirmpassword" />
+    <animated.form
+      id="registerform"
+      style={style}
+      onSubmit={onHandleSubmit}
+    >
+      <label for="fullname">Full name</label>
+      <input
+        type="text" 
+        id="fullname"
+        value={name}
+        onChange={onChangeName}
+      />
+      <label for="email">Email</label>
+      <input 
+        type="text" 
+        id="email"
+        value={email}
+        onChange={onChangeEmail}
+      />
+      <label for="password">Password</label>
+      <input 
+        type="password"
+        id="password"
+        value={password}
+        onChange={onChangePassword}
+      />
+      <label for="confirmpassword">Confirm Password</label>
+      <input
+        type="password" 
+        id="confirmpassword"
+        value={confirmPassword}
+        onChange={onChangeConfirmPassword}
+      />
+      <label for="phone">Số điện thoại liên lạc</label>
+      <input 
+        type="text" 
+        id="phone"
+        value={phone}
+        onChange={onChangePhone}
+      />
+      <label for="address">Thông tin địa chỉ</label>
+      <input
+        type="text" 
+        id="address" 
+        value={address}
+        onChange={onChangeAddress}
+      />
       <input type="submit" value="submit" class="submit" />
-    </React.Fragment>
+    </animated.form>
   );
 }
 
