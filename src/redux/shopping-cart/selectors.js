@@ -12,7 +12,11 @@ export const selectCart = createSelector(
 export const selectCartTotalProduct = createSelector(
   cartItemsSelector,
   (state) => {
-    return Object.values(state.cart ?? {}).length;
+    const products = Object.values(state.cart ?? {});
+    return products.reduce((total, p) => {
+      total += p?.quantity ?? 0;
+      return total;
+    }, 0);
   }
 );
 
@@ -26,3 +30,18 @@ export const selectCartTotalAmount = createSelector(
     }, 0);
   }
 );
+
+export const selectDraftOrder = createSelector(
+  cartItemsSelector,
+  (state) => state.draftOrder,
+);
+
+export const selectUserOrders = createSelector(
+  cartItemsSelector,
+  (state) => state.userOrders ?? [],
+)
+
+export const selectUserOrderDetails = createSelector(
+  cartItemsSelector,
+  (state) => state.selectedOrder,
+)
