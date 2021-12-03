@@ -1,9 +1,31 @@
-import React from 'react'
-import CartItem1 from '../components/CartItem1'
+import React, { useCallback, useEffect } from 'react'
 import Helmet from '../components/Helmet'
-// import Form from 'react-bootstrap/Form'
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectDraftOrder
+} from '../redux/shopping-cart/selectors';
+import {
+  createOrder,
+} from '../redux/shopping-cart/actions';
+import { useHistory } from "react-router-dom";
 
 const Bill = () => {
+
+  const dispatch = useDispatch();
+  const draftOrder = useSelector(selectDraftOrder);
+  const history = useHistory();
+
+  const onCreateOrder = useCallback(() => {
+    console.log('draftOrder', draftOrder);
+    dispatch(createOrder(draftOrder.userInfo, draftOrder.orders, draftOrder.totalAmount));
+  }, [dispatch, draftOrder]);
+
+  useEffect(() => {
+    if (!draftOrder) {
+      history.push("/");
+    }
+  }, [draftOrder, history]);
+
   return (
     <Helmet title="deliver">
       <div clasName="deliver__title">
@@ -30,7 +52,7 @@ const Bill = () => {
         </div>
       </div>
 
-      <button size="block" className="deliver__button">
+      <button onClick={onCreateOrder} size="block" className="deliver__button">
         Hoàn tất đơn hàng
       </button>
     </Helmet>

@@ -16,6 +16,15 @@ import { useSelector } from 'react-redux';
 import {
   selectUserInfo,
 } from '../redux/authentication/selectors';
+import {
+  selectUserOrders
+} from '../redux/shopping-cart/selectors';
+import {
+  getUserOrders,
+} from '../redux/shopping-cart/actions';
+import {
+  selectUserOrder,
+} from '../redux/shopping-cart/cartItemsSlide';
 import { useHistory } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -63,7 +72,16 @@ export default function CustomizedTables() {
 
   const {
     jwt,
+    user,
   } = useSelector(selectUserInfo);
+  const userOrders = useSelector(selectUserOrders);
+
+  const dispatchGetUserOders = useCallback(() => {
+    if (!user) {
+      return;
+    }
+    dispatch(getUserOrders(user.id));
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (!jwt) {
@@ -71,10 +89,22 @@ export default function CustomizedTables() {
     }
   }, [history, jwt])
 
+  useEffect(() => {
+    if (user) {
+      dispatchGetUserOders();
+    }
+  }, [dispatchGetUserOders, user]);
+
+  
+
   const onLogout = useCallback(() => {
-    console.log('1');
     dispatch(logoutAction())
   }, [dispatch]);
+
+  const onSelectOrder = useCallback((order) => {
+    dispatch(selectUserOrder(order));
+    history.push("/OrderCard");
+  }, [dispatch, history]);
 
   return (
     <div className="container">
@@ -94,17 +124,15 @@ export default function CustomizedTables() {
         </TableHead>
 
         <TableBody>
-        {rows.map((row) => (
+        {userOrders.map((row) => (
             <StyledTableRow key={row.name}>
-            <Link to="/OrderCard">
-              <div className="id" component="th" scope="row">
-                {row.name}
+              <div onClick={() => onSelectOrder(row)} className="id" component="th" scope="row">
+                {row.order_code}
               </div>
-              </Link>
 
-                  <StyledTableCell align="right">{row.date}</StyledTableCell>
-                  <StyledTableCell align="right">{row.typepayment}</StyledTableCell>
-                  <StyledTableCell align="right">{row.deliver}</StyledTableCell>
+                  <StyledTableCell align="right">{row.created_at}</StyledTableCell>
+                  <StyledTableCell align="right">{row.status}</StyledTableCell>
+                  <StyledTableCell align="right">{row.status !== 'done' ? 'Chưa giao' : 'Đã giao'}</StyledTableCell>
                   <StyledTableCell align="right">{row.price}</StyledTableCell>
                 </StyledTableRow>
               ))}
@@ -112,12 +140,11 @@ export default function CustomizedTables() {
           </Table>
         </TableContainer>
 
-        <h1 className="title">Quang Nguyễn</h1>
-        <div type="email" className="email"> quang.nguyenkhmt@gmail.com </div>
-        {/* <div className="address">Xem địa chỉ</div> */}
-        <Link to="/Cart">
-          <div className="address">Xem địa chỉ</div>
-        </Link>
+        <h1 className="title">{user?.name ?? 'Unknown'}</h1>
+        <div type="email" className="email">{user?.email ?? 'No email'}</div>
+        <div className="email">{user?.phone ?? 'No phone number'}</div>
+        <div className="email">{user?.address ?? 'No address'}</div>
+
         <div onClick={onLogout} className="address">Đăng xuất</div>
     </div>
   );

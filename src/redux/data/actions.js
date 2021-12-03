@@ -33,8 +33,6 @@ export const fetchBrands = () => async dispatch => {
 export const fetchProducts = (categories, brands) => async dispatch => {
   try {
     dispatch(getProducts());
-    console.log('categories', categories);
-    console.log('brands', brands);
     await api.get('/product/read.php', {
       params: {
         category_ids: categories ?? [],

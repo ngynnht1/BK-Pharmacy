@@ -10,6 +10,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import { useSelector } from 'react-redux';
+import {
+  selectUserInfo,
+} from '../redux/authentication/selectors';
+import {
+  selectUserOrderDetails
+} from '../redux/shopping-cart/selectors';
+import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import numberWithCommas from '../utils/numberWithCommas';
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -71,17 +82,27 @@ const rows = [
 ];
 
 const OrderCard = () => {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const {
+    jwt,
+    user,
+  } = useSelector(selectUserInfo);
+  const userOrder = useSelector(selectUserOrderDetails);
+
   return (
     <div className="container">
       <div className="container__orderid">
           <p className="container__orderid__title"> Đơn hàng:</p>
-          <p className="container__orderid__title__value"> #12345</p>
+          <p className="container__orderid__title__value">{`#${userOrder?.order_code}`}</p>
           <p className="container__orderid__date">, đặt lúc - </p>
-          <p className="container__orderid__date__value">17 09,2021 06:05CH</p>
+          <p className="container__orderid__date__value">{userOrder?.created_at}</p>
       </div>
   {/* Back to the account */}
     <Link to="/Profile">
-      <div className="container__backToAccount"> Quay lại trang tài khoảng </div>
+      <div className="container__backToAccount"> Quay lại trang tài khoản </div>
     </Link>
   {/* Delivery */}
       <div className="container__delivery">
@@ -92,11 +113,9 @@ const OrderCard = () => {
           <p>Tình trạng thanh toán:</p>
           <p> paid</p>
           </div>
-          <div className="container__delivery__from__name">Nguyễn Nhật Quang</div>
-          <div className="container__delivery__from__place">47 quốc lộ 1A ấp Voi xã An Thạnh huyện Bến Cầu tỉnh Tây Ninh</div>
-          <div className="container__delivery__from__city">Hồ Chí Minh</div>
-          <div className="container__delivery__from__country">VietNam</div>
-          <div className="container__delivery__from__num">0999999999</div>
+          <div className="container__delivery__from__name">{user?.name}</div>
+          <div className="container__delivery__from__place">{user?.address}</div>
+          <div className="container__delivery__from__num">{user?.phone}</div>
       </div>
 
     {/* Delivery to */}
@@ -106,12 +125,10 @@ const OrderCard = () => {
           <p>Vận chuyển:</p>
           <p> not fulfilled</p>
           </div>
-          <div className="container__delivery__to__name">Nguyễn Nhật Quang</div>
+          <div className="container__delivery__to__name">{user?.name}</div>
           <div className="container__delivery__to__place"
-          >47 quốc lộ 1A ấp Voi xã An Thạnh huyện Bến Cầu tỉnh Tây Ninh</div>
-          <div className="container__delivery__to__city">Hồ Chí Minh</div>
-          <div className="container__delivery__to__country">VietNam</div>
-          <div className="container__delivery__to__num">0999999999</div>
+          >{user?.address}</div>
+          <div className="container__delivery__to__num">{user?.phone}</div>
         </div>
       </div>
 
@@ -130,15 +147,15 @@ const OrderCard = () => {
         </TableHead>
 
         <TableBody>
-        {rows.map((row) => (
+        {userOrder?.order_items?.map((row) => (
             <StyledTableRow key={row.name}>
               <div className="name" component="th" scope="row">
-                {row.name}
+                {row.product_name}
               </div>
               <StyledTableCell align="right">{row.id}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">{row.num}</StyledTableCell>
-              <StyledTableCell align="right">{row.sum}</StyledTableCell>
+              <StyledTableCell align="right">{numberWithCommas(Number(row.price) * (1 - Number(row.discount_percent)/100))}</StyledTableCell>
+              <StyledTableCell align="right">{row.quantity}</StyledTableCell>
+              <StyledTableCell align="right">{numberWithCommas(Number(row.price) * (1 - Number(row.discount_percent)/100) * Number(row.quantity))}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
