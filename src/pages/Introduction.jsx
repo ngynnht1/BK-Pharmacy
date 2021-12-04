@@ -6,7 +6,8 @@ function Introduction() {
   return (
   <div>
     <div className="introduction">
-      <img src={introduction} alt=""/>
+      <img  className="introduction__image"
+      src={introduction} alt=""/>
     </div>
     <h1 className="section__title">Về chúng tôi</h1>
     <text className="info">
