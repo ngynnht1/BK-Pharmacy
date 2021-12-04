@@ -8,3 +8,18 @@ export const selectProductBySlug = (slug) => createSelector(
     return state.products?.find(e => encodeURIComponent(e.slug ?? '') === slug);
   }
 );
+
+export const selectTopProducts = createSelector(
+  dataSelector,
+  (state) => state.topProducts ?? [],
+)
+
+export const selectPopularProducts = createSelector(
+  dataSelector,
+  (state) => state.popularProducts ?? [],
+)
+
+export const selectNewProducts = createSelector(
+  dataSelector,
+  (state) => state.newProducts ?? [],
+)
