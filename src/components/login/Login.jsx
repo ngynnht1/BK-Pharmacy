@@ -49,7 +49,7 @@ function Login() {
   }
 
   return (
-    <div className="login-register-wrapper">
+    <div className="login-register__wrapper">
       <div className="nav-buttons">
         <animated.button
           onClick={loginClicked}
