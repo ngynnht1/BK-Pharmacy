@@ -107,7 +107,7 @@ const Accessories = () => {
 
                     <div className="catalog__filter__widget">
                         <div className="catalog__filter__widget__title">
-                            Brand name
+                            Nhãn hiệu
                         </div>
                         <div className="catalog__filter__widget__content">
                             {
