@@ -1,15 +1,16 @@
 .section {
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
+  
 
     & > * ~ * {
         margin-top: 70px;
     }
 
     &__title {
-        background-color: lightskyblue;
-        color: black;
+        background-color: $main-color;
+        color: $main-bg;
         height:4rem;
         font-size: 2rem;
         text-transform: capitalize;

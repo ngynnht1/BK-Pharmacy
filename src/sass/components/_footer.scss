@@ -1,10 +1,16 @@
 .footer {
+    height: 100%;
     padding: 70px 0;
     box-shadow: $box-shadow;
     font-size: 1.1rem;
-    background-color: lightskyblue;
+    background-color: #2E4C6D;
     
-
+    &__map{
+        
+        &__image{
+            border-radius: 10px;
+        }
+    }
     &__logo {
         height: 80px;
     }
@@ -24,6 +30,7 @@
     &__content {
         p {
             margin-bottom: 1.25rem;
+            color: #c0c1c2;
         }
     }
 }
