@@ -10,6 +10,9 @@ const initialState = {
   userError: undefined,
   creatingUser: false,
   createUserError: undefined,
+  createUserSuccess: false,
+  showAuthPopup: false,
+  registrationFormStatus: false,
 }
 
 export const authenticationSlice = createSlice({
@@ -36,15 +39,22 @@ export const authenticationSlice = createSlice({
       createUser: (state, _action) => {
         state.creatingUser = true;
         state.createUserError = undefined;
+        state.createUserSuccess = undefined;
       },
       createUserSuccess: (state, action) => {
         state.creatingUser = false;
         state.createUserError = undefined;
+        state.createUserSuccess = true;
       },
       createUserError: (state, action) => {
         const { error } = action.payload;
         state.creatingUser = false;
         state.createUserError = error;
+      },
+      cleanupCreateUser: (state, action) => {
+        state.createUserError = undefined;
+        state.creatingUser = false;
+        state.createUserSuccess = undefined;
       },
       validateJWTSuccess: (state, action) => {
         const { user, jwt } = action.payload;
@@ -57,9 +67,16 @@ export const authenticationSlice = createSlice({
         setCookie('jwt', '', 1);
       },
       logoutSuccess: (state, action) => {
+        state.createUserSuccess = undefined;
         state.user = undefined;
         state.jwt = undefined;
         setCookie('jwt', '', 1);
+      },
+      showAuthPopup: (state, action) => {
+        state.showAuthPopup = action.payload;
+      },
+      showRegistrationFormStatus: (state, action) => {
+        state.registrationFormStatus = action.payload;
       }
     },
 })
@@ -75,6 +92,9 @@ export const {
   validateJTWError,
   validateJWTSuccess,
   logoutSuccess,
+  showAuthPopup,
+  showRegistrationFormStatus,
+  cleanupCreateUser,
 } = authenticationSlice.actions;
 
 export default authenticationSlice.reducer

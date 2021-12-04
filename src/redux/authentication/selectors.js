@@ -8,6 +8,17 @@ export const selectUserInfo = createSelector(
     return {
       user: state.user,
       jwt: state.jwt,
+      createUserSuccess: state.createUserSuccess ?? false,
     };
   }
+);
+
+export const selectShowAuthPopup = createSelector(
+  authSelector,
+  (state) => state.showAuthPopup ?? false,
+);
+
+export const selectRegistrationFormStatus = createSelector(
+  authSelector,
+  (state) => state.registrationFormStatus ?? false,
 );

@@ -10,7 +10,12 @@ import {useState} from 'react';
 import { useSelector } from 'react-redux';
 import {
     selectUserInfo,
+    selectShowAuthPopup,
 } from '../redux/authentication/selectors';
+import {
+    showAuthPopup,
+} from '../redux/authentication/authenticationSlice';
+import { useDispatch } from 'react-redux'
 
 const mainNav = [
     {
@@ -34,13 +39,21 @@ const mainNav = [
 
 const Header = () => {
 
+    const dispatch = useDispatch();
+
     const { pathname } = useLocation()
     const activeNav = mainNav.findIndex(e => e.path === pathname)
+
+    const isShowAuthPopup = useSelector(selectShowAuthPopup);
 
     const headerRef = useRef(null)
     const {
         user,
     } = useSelector(selectUserInfo);
+
+    const onShowAuthPopup = useCallback((shouldShow) => {
+        dispatch(showAuthPopup(shouldShow));
+    }, [dispatch]);
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -65,7 +78,7 @@ const Header = () => {
         if (user) {
             console.log('user logged in');
         } else {
-            setButtonPopup(true);
+            onShowAuthPopup(true);
         }
     }, [user]);
 
@@ -124,7 +137,7 @@ const Header = () => {
                                     <AccountCircle/>
                             </div>                            
                         }
-                        <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                        <Popup trigger={isShowAuthPopup} setTrigger={onShowAuthPopup}>
                             <Login/>
                         </Popup>
                     </div>

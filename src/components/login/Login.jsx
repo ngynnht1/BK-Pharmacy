@@ -1,11 +1,28 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "./Login.css";
 import { useSpring, animated } from "react-spring";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginAction, signupAction } from "../../redux/authentication/actions";
+import {
+  selectRegistrationFormStatus,
+  selectUserInfo,
+} from '../../redux/authentication/selectors';
+import {
+  showRegistrationFormStatus,
+  showAuthPopup,
+  cleanupCreateUser,
+} from '../../redux/authentication/authenticationSlice';
 
 function Login() {
-  const [registrationFormStatus, setRegistartionFormStatus] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const registrationFormStatus = useSelector(selectRegistrationFormStatus);
+
+  const setRegistartionFormStatus = useCallback((status) => {
+    dispatch(showRegistrationFormStatus(status));
+  }, [dispatch]);
+
   const loginProps = useSpring({
     left: registrationFormStatus ? -500 : 0, // Login form sliding positions
   });
@@ -64,6 +81,17 @@ function LoginForm({ style }) {
 
   const dispatch = useDispatch();
 
+  const { user } = useSelector(selectUserInfo);
+  const registrationFormStatus = useSelector(selectRegistrationFormStatus);
+
+  useEffect(() => {
+    if (!registrationFormStatus && user) {
+      alert('Đăng nhập thành công');
+      dispatch(showAuthPopup(false));
+    }
+  }, [dispatch, registrationFormStatus, user]);
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -115,6 +143,23 @@ function RegisterForm({ style }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+
+  const { createUserSuccess } = useSelector(selectUserInfo);
+  const registrationFormStatus = useSelector(selectRegistrationFormStatus);
+
+  useEffect(() => {
+    if (registrationFormStatus && createUserSuccess) {
+      alert('Đăng ký thành công. Vui lòng đăng nhập lại');
+      dispatch(showRegistrationFormStatus(false));
+      setName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setPhone('');
+      setAddress('');
+      dispatch(cleanupCreateUser());
+    }
+  }, [dispatch, registrationFormStatus, createUserSuccess]);
 
   const onChangeName = (event) => {
     setName(event.target.value);

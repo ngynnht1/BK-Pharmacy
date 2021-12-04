@@ -51,7 +51,10 @@ export const signupAction = (
         'Content-Type': 'multipart/form-data',
       }
     })
-      .then((response) => dispatch(createUserSuccess(response.data)));
+      .then((response) => {
+        console.log('response', response);
+        dispatch(createUserSuccess(response.data));
+      });
   } catch (e) {
     dispatch(createUserError(e?.message ?? ''));
   }
