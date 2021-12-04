@@ -14,7 +14,7 @@ const footerAboutLinks = [
     //     path: "/about"
     // },
     {
-        display: "Tại Pharmacity, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.",
+        display: "Tại Bách Khoa Pharmacy, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.",
         path: "/about"
     },
     {
@@ -72,7 +72,9 @@ const Footer = () => {
                     </div>
                     <div>
                         <div className="footer__title">
-                            <h3>Về Pharmacy</h3>
+
+                            <h3>Về BK Pharmacy</h3>
+
                         </div>
                         <div className="footer__content">
                             {
@@ -88,7 +90,9 @@ const Footer = () => {
                     </div>
                     <div>
                         <div className="footer__title">
-                           <h3>Công Ty Dược Phẩm Pharmacy</h3>
+
+                           <h3>Công Ty Dược Phẩm Bách Khoa Pharmacy</h3>
+
                         </div>
                         <div className="footer__content">
                             {
@@ -105,16 +109,15 @@ const Footer = () => {
                     
                     <div className="footer__about">
                         <p>
-                            
+
                             <Link to="/">
                                 <img src={logo} className="footer__logo" alt="" />
                             </Link>
                         </p>
-                        <div className="footer__content">
-                        <p> Tại Pharmacy, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.</p>
-                        </div>
 
-                       
+                        <div className="footer__content">
+                        <p> Tại BK Pharmacy, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.</p>
+                        </div>                      
                     </div>
                 </Grid>
             </div>
