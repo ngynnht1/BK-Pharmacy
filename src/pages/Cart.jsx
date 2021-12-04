@@ -9,12 +9,6 @@ import Button from '../components/Button';
 
 import numberWithCommas from '../utils/numberWithCommas';
 
-import Popup from '../components/login/Popup';
-import Login from '../components/login/Login';
-import {
-    selectUserInfo,
-} from '../redux/authentication/selectors';
-
 import {
   selectCart,
   selectCartTotalProduct,
@@ -22,6 +16,12 @@ import {
 } from '../redux/shopping-cart/selectors';
 import { saveOrder } from '../redux/shopping-cart/cartItemsSlide';
 import { useHistory } from "react-router-dom";
+import {
+    selectUserInfo,
+} from '../redux/authentication/selectors';
+import {
+    showAuthPopup,
+} from '../redux/authentication/authenticationSlice';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -32,7 +32,9 @@ const Cart = () => {
   const totalAmount = useSelector(selectCartTotalAmount);
   const { user } = useSelector(selectUserInfo);
 
-  const [buttonPopup, setButtonPopup] = useState(false);
+  const onShowAuthPopup = useCallback((shouldShow) => {
+    dispatch(showAuthPopup(shouldShow));
+}, [dispatch]);
 
   const [name, setName] = useState(user?.name ?? '');
   const [email, setEmail] = useState(user?.email ?? '');
@@ -102,12 +104,9 @@ const Cart = () => {
                 <div className="cart__info__account">
                 <h3>Bạn đã có tài khoản?</h3>
 
-                <div onClick={() => setButtonPopup(true)}  >
+                <div onClick={() => onShowAuthPopup(true)}  >
                 <h3 className="cart__info__account__login">Đăng nhập</h3>
                 </div>
-                <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                    <Login/>
-                </Popup>
                 </div>
             }
 

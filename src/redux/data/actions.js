@@ -5,6 +5,12 @@ import {
   getBrandsSuccess,
   getProducts,
   getProductsSuccess,
+  getTopProducts,
+  getTopProductsSuccess,
+  getPopularProducts,
+  getPopularProductsSuccess,
+  getNewProducts,
+  getNewProductsSuccess,
 } from './dataSlice'
 import api from '../../api';
 
@@ -40,6 +46,54 @@ export const fetchProducts = (categories, brands) => async dispatch => {
       }
     })
       .then((response) => dispatch(getProductsSuccess(response.data ?? [])))
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
+export const fetchTopProducts = (categories, brands) => async dispatch => {
+  try {
+    dispatch(getTopProducts());
+    await api.get('/product/readTopProducts.php', {
+      params: {
+        category_ids: categories ?? [],
+        brand_ids: brands ?? [],
+      }
+    })
+      .then((response) => dispatch(getTopProductsSuccess(response.data ?? [])))
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
+export const fetchPopularProducts = (categories, brands) => async dispatch => {
+  try {
+    dispatch(getPopularProducts());
+    await api.get('/product/readPopularProducts.php', {
+      params: {
+        category_ids: categories ?? [],
+        brand_ids: brands ?? [],
+      }
+    })
+      .then((response) => dispatch(getPopularProductsSuccess(response.data ?? [])))
+  }
+  catch (e) {
+    console.log(e)
+  }
+}
+
+export const fetchNewProducts = (categories, brands) => async dispatch => {
+  try {
+    dispatch(getNewProducts());
+    await api.get('/product/readNewProducts.php', {
+      params: {
+        category_ids: categories ?? [],
+        brand_ids: brands ?? [],
+      }
+    })
+      .then((response) => dispatch(getNewProductsSuccess(response.data ?? [])))
   }
   catch (e) {
     console.log(e)

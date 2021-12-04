@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import Helmet from '../components/Helmet'
@@ -13,11 +13,48 @@ import productData1 from '../assets/fake-data/product-1'
 
 import banner from '../assets/images/banner.png'
 import ProductCard1 from '../components/ProductCard1'
+import { useDispatch, useSelector } from 'react-redux';
 
-
+import {
+    selectTopProducts,
+    selectPopularProducts,
+    selectNewProducts
+} from '../redux/data/selectors';
+import {
+    fetchTopProducts,
+    fetchPopularProducts,
+    fetchNewProducts
+} from '../redux/data/actions';
 
 
 const Home = () => {
+
+    const dispatch = useDispatch();
+    const topProducts = useSelector(selectTopProducts);
+    const popularProducts = useSelector(selectPopularProducts);
+    const newProducts = useSelector(selectNewProducts);
+
+    console.log('topProducts', topProducts);
+
+    const dispatchFetchTopProducts = useCallback(() => {
+        dispatch(fetchTopProducts());
+    }, [dispatch]);
+
+    const dispatchFetchPopularProducts = useCallback(() => {
+        dispatch(fetchPopularProducts());
+    }, [dispatch]);
+
+    const dispatchFetchNewProducts = useCallback(() => {
+        dispatch(fetchNewProducts());
+    }, [dispatch]);
+
+
+    useEffect(() => {
+        dispatchFetchNewProducts();
+        dispatchFetchPopularProducts();
+        dispatchFetchTopProducts();
+    }, [dispatchFetchNewProducts, dispatchFetchPopularProducts, dispatchFetchTopProducts]);
+
     return (
         <Helmet title="Trang chủ">
             {/* hero slider */}
@@ -52,6 +89,7 @@ const Home = () => {
                     Top sản phẩm bán chạy trong tuần
                 </SectionTitle>
                 <SectionBody>
+                    {topProducts.length !== 0 &&
                     <Grid
                         col={4}
                         mdCol={2}
@@ -59,17 +97,16 @@ const Home = () => {
                         gap={20}
                     >
                         {
-                            productData1.getProducts1(4).map((item, index) => (
+                            topProducts.map((item, index) => (
                                 <ProductCard1
                                     key={index}
-                                    img01={item.image01}
-                                    name={item.title}
-                                    price={Number(item.price)}
+                                    product={item}
                                     slug={item.slug}
                                 />
                             ))
                         }
                     </Grid>
+                    }
                 </SectionBody>
             </Section>
             {/* end best selling section */}
@@ -80,6 +117,7 @@ const Home = () => {
                     sản phẩm mới
                 </SectionTitle>
                 <SectionBody className="new-product">
+                    {newProducts.length !== 0 &&
                     <Grid
                         col={4}
                         mdCol={2}
@@ -87,18 +125,16 @@ const Home = () => {
                         gap={20}
                     >
                         {
-                            productData1.getProducts1(8).map((item, index) => (
+                            newProducts.map((item, index) => (
                                 <ProductCard1
                                     key={index}
-                                    img01={item.image01}
-
-                                    name={item.title}
-                                    price={Number(item.price)}
+                                    product={item}
                                     slug={item.slug}
                                 />
                             ))
                         }
                     </Grid>
+                    }
                 </SectionBody>
             </Section>
             {/* end new arrival section */}
@@ -119,6 +155,7 @@ const Home = () => {
                     Phổ biến
                 </SectionTitle>
                 <SectionBody>
+                    {popularProducts.length !== 0 &&
                     <Grid
                         col={4}
                         mdCol={2}
@@ -126,18 +163,16 @@ const Home = () => {
                         gap={20}
                     >
                         {
-                            productData1.getProducts1(12).map((item, index) => (
+                            popularProducts.map((item, index) => (
                                 <ProductCard1
                                     key={index}
-                                    img01={item.image01}
-
-                                    name={item.title}
-                                    price={Number(item.price)}
+                                    product={item}
                                     slug={item.slug}
                                 />
                             ))
                         }
                     </Grid>
+                    }
                 </SectionBody>
             </Section>
             {/* end popular product section */}

@@ -7,6 +7,12 @@ const initialState = {
     loadingBrands: false,
     products: [],
     loadingProducts: false,
+    topProducts: [],
+    loadingTopProducts: false,
+    popularProducts: [],
+    loadingPopularProducts: false,
+    newProducts: [],
+    loadingNewProducts: false,
 }
 
 export const dataSlice = createSlice({
@@ -33,7 +39,28 @@ export const dataSlice = createSlice({
         getProductsSuccess: (state, action) => {
           state.products = action.payload;
           state.loadingProducts = false;
-        }
+        },
+        getTopProducts: (state, action) => {
+          state.loadingTopProducts = true;
+        },
+        getTopProductsSuccess: (state, action) => {
+          state.loadingTopProducts = false;
+          state.topProducts = action.payload;
+        },
+        getPopularProducts: (state, action) => {
+          state.loadingPopularProducts = true;
+        },
+        getPopularProductsSuccess: (state, action) => {
+          state.loadingPopularProducts = false;
+          state.popularProducts = action.payload;
+        },
+        getNewProducts: (state, action) => {
+          state.loadingNewProducts = true;
+        },
+        getNewProductsSuccess: (state, action) => {
+          state.loadingNewProducts = false;
+          state.newProducts = action.payload;
+        },
     },
 })
 
@@ -45,6 +72,12 @@ export const {
   getBrandsSuccess,
   getProducts,
   getProductsSuccess,
+  getTopProducts,
+  getTopProductsSuccess,
+  getPopularProducts,
+  getPopularProductsSuccess,
+  getNewProducts,
+  getNewProductsSuccess,
 } = dataSlice.actions
 
 export default dataSlice.reducer
