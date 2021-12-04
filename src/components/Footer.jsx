@@ -102,22 +102,7 @@ const Footer = () => {
                             }
                         </div>
                     </div>
-                    <div>
-                        <div className="footer__title">
-                           <h3>Công Ty Dược Phẩm Pharmacy</h3>
-                        </div>
-                        <div className="footer__content">
-                            {
-                                footerCustomerLinks.map((item, index) => (
-                                    <p key={index}>
-                                        <Link to={item.path}>
-                                            {item.display}
-                                        </Link>
-                                    </p>
-                                ))
-                            }
-                        </div>
-                    </div>
+                    
                     <div className="footer__about">
                         <p>
                             

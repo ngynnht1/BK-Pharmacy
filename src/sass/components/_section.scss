@@ -9,8 +9,8 @@
     }
 
     &__title {
-        background-color: lightskyblue;
-        color: black;
+        background-color: $main-color;
+        color: $main-bg;
         height:4rem;
         font-size: 2rem;
         text-transform: capitalize;
