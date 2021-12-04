@@ -14,6 +14,7 @@ import productData1 from '../assets/fake-data/product-1'
 import banner from '../assets/images/banner.png'
 import ProductCard1 from '../components/ProductCard1'
 import { useDispatch, useSelector } from 'react-redux';
+import banner2 from '../assets/images/banner2.png'
 
 import {
     selectTopProducts,
@@ -79,6 +80,13 @@ const Home = () => {
                     >
                   
                     </Grid>
+                </SectionBody>
+            </Section>
+            <Section>
+                <SectionBody>
+                    <Link to="/catalog">
+                        <img src={banner2} alt="" />
+                    </Link>
                 </SectionBody>
             </Section>
             {/* end policy section */}
