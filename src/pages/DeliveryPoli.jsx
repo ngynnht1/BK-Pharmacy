@@ -3,13 +3,13 @@ const DeliveryPoli = () => {
     <text>
     <h1 className="section__title">Chính sách giao hàng</h1>
       <h2 className="deliveryPoli__section">A. Giao hàng</h2>
-        <h3 className="deliveryPoli__section__text">1. Pharmacity có giao hàng thuốc không</h3>
+        <h3 className="deliveryPoli__section__text">1. Bách Khoa Pharmacy có giao hàng thuốc không</h3>
           <p>
-          – Thuốc kê đơn: Pharmacity chỉ bán thuốc kê đơn tại nhà thuốc Pharmacity khi có đơn thuốc hợp lệ. Thuốc kê đơn không được bán trực tuyến.
+          – Thuốc kê đơn: Bách Khoa Pharmacy chỉ bán thuốc kê đơn tại nhà thuốc Bách Khoa Pharmacy khi có đơn thuốc hợp lệ. Thuốc kê đơn không được bán trực tuyến.
           <br/>
           – Thuốc không kê đơn: Quý khách có thể đặt thuốc không kê đơn trực tuyến qua trang web Pharmacity.vn, ứng dụng ExtraCare hoặc tổng đài đặt hàng miễn cước 1800 6821.
           <br/>
-          Thuốc không kê đơn chỉ bán trực tuyến theo đơn vị hộp/lọ/chai chứ không bán lẻ theo đơn vị viên/vỉ/gói… nhằm đảm bảo chất lượng thuốc trong khi quá trình vận chuyển. Để mua lẻ viên/vỉ/gói…, quý khách vui lòng mua trực tiếp tại nhà thuốc Pharmacity.
+          Thuốc không kê đơn chỉ bán trực tuyến theo đơn vị hộp/lọ/chai chứ không bán lẻ theo đơn vị viên/vỉ/gói… nhằm đảm bảo chất lượng thuốc trong khi quá trình vận chuyển. Để mua lẻ viên/vỉ/gói…, quý khách vui lòng mua trực tiếp tại nhà thuốc Bách Khoa Pharmacy.
           </p>
         <h3 className="deliveryPoli__section__text">2. Khi nào tôi có thể nhận được đơn hàng</h3>
           <p>
@@ -27,18 +27,18 @@ const DeliveryPoli = () => {
           <br/><br/>
           Tổng giá trị cuối cùng của đơn hàng đã bao gồm phí vận chuyển (nếu có) sẽ được hiển thị trong đơn hàng.
           </p>
-        <h3 className="deliveryPoli__section__text">4. Pharmacity có giao hàng quốc tế không</h3>
+        <h3 className="deliveryPoli__section__text">4. Bách Khoa Pharmacy có giao hàng quốc tế không</h3>
           Tổng giá trị cuối cùng của đơn hàng đã bao gồm phí vận chuyển (nếu có) sẽ được hiển thị trong đơn hàng.
         <br/><br/>
 
       <h2 className="deliveryPoli__section">B. Thông tin giao hàng</h2>
         <h3 className="deliveryPoli__section__text">1. Tôi có được thông báo trước khi giao hàng tháng?</h3>
           <p>
-          Đối tác vận chuyển của Pharmacity sẽ liên hệ với quý khách trước khi giao hàng
+          Đối tác vận chuyển của Bách Khoa Pharmacy sẽ liên hệ với quý khách trước khi giao hàng
           </p>
         <h3 className="deliveryPoli__section__text">2. Tôi có thể hẹn thời gian giao hàng được không?</h3>
           <p>
-          Xin vui lòng liên hệ bộ phận chăm sóc khách hàng của Pharmacity để được hỗ trợ tốt nhất.
+          Xin vui lòng liên hệ bộ phận chăm sóc khách hàng của Bách Khoa Pharmacy để được hỗ trợ tốt nhất.
           </p>
         <h3 className="deliveryPoli__section__text">3. Tôi muốn kiểm tra hàng trước khi thanh toán được không?</h3>
           <p>
@@ -46,13 +46,13 @@ const DeliveryPoli = () => {
           <br/><br/>
           - Trong trường hợp quý khách không hài lòng với bất kì sản phẩm trong đơn hàng, ngay tại thời điểm được giao hàng, quý khách vui lòng từ chối không nhận toàn bộ kiện hàng hoặc thanh toán toàn bộ giá trị đơn hàng và hoàn trả lại cho bưu tá giao hàng.
           <br/><br/>
-          Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ bộ phận chăm sóc khách hàng của Pharmacity để được hỗ trợ nhanh chóng.
+          Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ bộ phận chăm sóc khách hàng của Bách Khoa Pharmacy để được hỗ trợ nhanh chóng.
           </p>
-        <h3 className="deliveryPoli__section__text">4. Nếu giao hàng không thành công, Pharmacity có thông báo cho tôi biết không?</h3>
+        <h3 className="deliveryPoli__section__text">4. Nếu giao hàng không thành công, Bách Khoa Pharmacy có thông báo cho tôi biết không?</h3>
           <p>
-          Trong trường hợp đơn hàng chưa được giao thành công đến quý khách lần thứ nhất, Pharmacity sẽ liên hệ với quý khách để sắp xếp lại lịch giao hàng.
+          Trong trường hợp đơn hàng chưa được giao thành công đến quý khách lần thứ nhất, Bách Khoa Pharmacy sẽ liên hệ với quý khách để sắp xếp lại lịch giao hàng.
           <br/><br/>
-          Nếu Pharmacity không thể kết nối được với quý khách hoặc đơn vị vận chuyển không thể giao hàng thành công đến quý khách trong lần giao hàng thứ hai thì đơn hàng sẽ được hủy bởi hệ thống. Pharmacity sẽ giao lại tối đa 3 lần cho một đơn hàng.
+          Nếu Bách Khoa Pharmacy không thể kết nối được với quý khách hoặc đơn vị vận chuyển không thể giao hàng thành công đến quý khách trong lần giao hàng thứ hai thì đơn hàng sẽ được hủy bởi hệ thống. Bách Khoa Pharmacy sẽ giao lại tối đa 3 lần cho một đơn hàng.
           </p>
     </text>
   )
