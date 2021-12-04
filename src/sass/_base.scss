@@ -13,9 +13,9 @@
 }
 
 html {
+    background-color: #fff;
     font-size: 13px;
     font-family: 'Varela Round', sans-serif;
-
     @include mobile {
         font-size: 11px;
     }
