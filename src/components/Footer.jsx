@@ -14,7 +14,7 @@ const footerAboutLinks = [
     //     path: "/about"
     // },
     {
-        display: "Tại Pharmacity, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.",
+        display: "Tại Bách Khoa Pharmacy, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.",
         path: "/about"
     },
     {
@@ -72,7 +72,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <div className="footer__title">
-                            Về Pharmacy
+                            Về Bách Khoa Pharmacy
                         </div>
                         <div className="footer__content">
                             {
@@ -88,7 +88,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <div className="footer__title">
-                           Công Ty Cổ Phần Dược Phẩm Pharmacy
+                           Công Ty Cổ Phần Dược Phẩm Bách Khoa Pharmacy
                         </div>
                         <div className="footer__content">
                             {
@@ -104,12 +104,12 @@ const Footer = () => {
                     </div>
                     <div className="footer__about">
                         <p>
-                            
+
                             <Link to="/">
                                 <img src={logo} className="footer__logo" alt="" />
                             </Link>
                         </p>
-                        Tại Pharmacy, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.
+                        Tại Bách Khoa Pharmacy, mỗi dược sỹ luôn tận tâm phục vụ và được đào tạo để hoàn thành xuất sắc những sứ mệnh được giao.
                         <p>
 
                         </p>
