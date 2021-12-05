@@ -49,21 +49,21 @@ function Login() {
   }
 
   return (
-    <div className="login-register-wrapper">
+    <div className="login-register__wrapper">
       <div className="nav-buttons">
         <animated.button
           onClick={loginClicked}
           id="loginBtn"
           style={loginBtnProps}
         >
-          Login
+          Đăng nhập
         </animated.button>
         <animated.button
           onClick={registerClicked}
           id="registerBtn"
           style={registerBtnProps}
         >
-          Register
+          Đăng ký
         </animated.button>
       </div>
       <div className="form-group">
@@ -114,14 +114,14 @@ function LoginForm({ style }) {
       style={style}
       onSubmit={onHandleSubmit}
     >
-      <label for="username">USERNAME</label>
+      <label for="username">Mail đăng nhập</label>
       <input
         type="text"
         id="username"
         value={email}
         onChange={onChangeEmail}
       />
-      <label for="password">PASSWORD</label>
+      <label for="password">Mật khẩu</label>
       <input
         type="password"
         id="password"
@@ -202,7 +202,7 @@ function RegisterForm({ style }) {
       style={style}
       onSubmit={onHandleSubmit}
     >
-      <label for="fullname">Full name</label>
+      <label for="fullname">Họ và tên</label>
       <input
         type="text" 
         id="fullname"
@@ -216,14 +216,14 @@ function RegisterForm({ style }) {
         value={email}
         onChange={onChangeEmail}
       />
-      <label for="password">Password</label>
+      <label for="password">Mật khẩu</label>
       <input 
         type="password"
         id="password"
         value={password}
         onChange={onChangePassword}
       />
-      <label for="confirmpassword">Confirm Password</label>
+      <label for="confirmpassword">Nhập lại mật khẩu</label>
       <input
         type="password" 
         id="confirmpassword"
