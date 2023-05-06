@@ -1,19 +1,18 @@
-import React from 'react'
-
-import { BrowserRouter, Route } from 'react-router-dom'
-
-import Header from './Header'
 import Footer from './Footer'
-// import Bill from './Bill'
-
-import Routes from '../routes/Routes'
+import Header from './Header'
 import ProductViewModal1 from './ProductViewModal1'
-import { useEffect } from 'react';
+import React from 'react'
+import { Route } from 'react-router-dom'
+import Routes from '../routes/Routes'
 import {
     getCookie,
 } from '../utils/localStorageHelper';
 import { useDispatch } from 'react-redux'
+import { useEffect } from 'react';
 import { validateJWTAction } from '../redux/authentication/actions'
+
+// import Bill from './Bill'
+
 
 const Layout = () => {
 
@@ -28,21 +27,18 @@ const Layout = () => {
     }, [dispatch]);
 
     return (
-        <BrowserRouter>
-            <Route render={props => (
-                <div>
-                    <Header {...props}/>
-                    <div className="container">
-                        <div className="main">
-                            <Routes/>
-                        </div>
-                    </div>
-                    <Footer/>
-                    <ProductViewModal1/>
+      <Route render={props => (
+        <div>
+            <Header {...props}/>
+            <div className="container">
+                <div className="main">
+                    <Routes/>
                 </div>
-            )}/>
-
-        </BrowserRouter>
+            </div>
+            <Footer/>
+            <ProductViewModal1/>
+        </div>
+      )}/>
     )
 }
 

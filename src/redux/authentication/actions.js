@@ -1,14 +1,15 @@
-import api from '../../api';
 import {
+  createUserError,
+  createUserSuccess,
   getUser,
-  getUserSuccess,
   getUserError,
+  getUserSuccess,
+  logoutSuccess,
   validateJTWError,
   validateJWTSuccess,
-  logoutSuccess,
-  createUserSuccess,
-  createUserError,
 } from './authenticationSlice';
+
+import api from '../../api';
 
 export const loginAction = (
   email,
@@ -17,6 +18,7 @@ export const loginAction = (
   try {
     dispatch(getUser());
     const form = new FormData();
+    console.log('1')
     form.append('email', email);
     form.append('password', password);
     await api.post('/user/login.php', form, {
@@ -24,7 +26,10 @@ export const loginAction = (
         'Content-Type': 'multipart/form-data',
       }
     })
-      .then((response) => dispatch(getUserSuccess(response.data)));
+      .then((response) => {
+        console.log('response', response)
+        dispatch(getUserSuccess(response.data))
+      });
 
   } catch (e) {
     console.log(e);

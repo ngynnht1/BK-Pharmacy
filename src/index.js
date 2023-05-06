@@ -1,19 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-
-import { store } from './redux/store'
-import { Provider } from 'react-redux'
-
 import './assets/boxicons-2.0.7/css/boxicons.min.css'
 import './sass/index.scss'
 
+import { BrowserRouter } from 'react-router-dom'
 import Layout from './components/Layout'
+import { Provider } from 'react-redux'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reportWebVitals from './reportWebVitals';
+import { store } from './redux/store'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Layout />
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

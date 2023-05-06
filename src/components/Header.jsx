@@ -1,21 +1,20 @@
 import { AccountCircle, ContactPage, Search, ShoppingBag } from '@mui/icons-material'
-import React, { useRef, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logo from '../assets/images/Logo3.png'
-
-import Popup from './login/Popup';
-import Login from './login/Login';
-
-import {useState} from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useRef } from 'react'
 import {
-    selectUserInfo,
     selectShowAuthPopup,
+    selectUserInfo,
 } from '../redux/authentication/selectors';
+
+import Login from './login/Login';
+import Popup from './login/Popup';
+import logo from '../assets/images/Logo3.png'
 import {
     showAuthPopup,
 } from '../redux/authentication/authenticationSlice';
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux';
+import {useState} from 'react';
 
 const mainNav = [
     {
@@ -41,8 +40,8 @@ const Header = () => {
 
     const dispatch = useDispatch();
 
-    const { pathname } = useLocation()
-    const activeNav = mainNav.findIndex(e => e.path === pathname)
+    // const { pathname } = useLocation()
+    const activeNav = mainNav.findIndex(e => e.path === 'ss')
 
     const isShowAuthPopup = useSelector(selectShowAuthPopup);
 

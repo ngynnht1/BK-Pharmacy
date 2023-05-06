@@ -1,20 +1,15 @@
-import React from 'react'
-
 import { Route, Switch } from 'react-router-dom'
 
-import Home from '../pages/Home'
-
+import Accessories from '../pages/Accessories'
+import Bill from '../components/Bill'
 import Cart from '../pages/Cart'
 import DeliveryPoli from '../pages/DeliveryPoli'
-
-import Accessories from '../pages/Accessories'
-import Product1 from '../pages/Product1'
+import Home from '../pages/Home'
 import Introduction from '../pages/Introduction'
-import Bill from '../components/Bill'
-import Profile from '../components/Profile'
 import OrderCard from '../components/OrderCard'
-
-
+import Product1 from '../pages/Product1'
+import Profile from '../components/Profile'
+import React from 'react'
 
 const Routes = () => {
     return (

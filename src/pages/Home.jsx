@@ -1,32 +1,26 @@
 import React, { useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-
-import Helmet from '../components/Helmet'
-import HeroSlider from '../components/HeroSlider'
-import Section, { SectionTitle, SectionBody } from '../components/Section'
+import Section, { SectionBody, SectionTitle } from '../components/Section'
+import {
+    fetchNewProducts,
+    fetchPopularProducts,
+    fetchTopProducts
+} from '../redux/data/actions';
+import {
+    selectNewProducts,
+    selectPopularProducts,
+    selectTopProducts
+} from '../redux/data/selectors';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Grid from '../components/Grid'
-
-
+import Helmet from '../components/Helmet'
+import HeroSlider from '../components/HeroSlider'
+import { Link } from 'react-router-dom'
+import ProductCard1 from '../components/ProductCard1'
+import banner from '../assets/images/banner.png'
+import banner2 from '../assets/images/banner2.png'
 import heroSliderData from '../assets/fake-data/hero-slider'
 import productData1 from '../assets/fake-data/product-1'
-
-import banner from '../assets/images/banner.png'
-import ProductCard1 from '../components/ProductCard1'
-import { useDispatch, useSelector } from 'react-redux';
-import banner2 from '../assets/images/banner2.png'
-
-import {
-    selectTopProducts,
-    selectPopularProducts,
-    selectNewProducts
-} from '../redux/data/selectors';
-import {
-    fetchTopProducts,
-    fetchPopularProducts,
-    fetchNewProducts
-} from '../redux/data/actions';
-
 
 const Home = () => {
 
@@ -36,6 +30,8 @@ const Home = () => {
     const newProducts = useSelector(selectNewProducts);
 
     console.log('topProducts', topProducts);
+    console.log('popularProducts', popularProducts);
+    console.log('newProducts', newProducts);
 
     const dispatchFetchTopProducts = useCallback(() => {
         dispatch(fetchTopProducts());
@@ -97,7 +93,7 @@ const Home = () => {
                     Top sản phẩm bán chạy trong tuần
                 </SectionTitle>
                 <SectionBody>
-                    {topProducts.length !== 0 &&
+                    {topProducts?.length !== 0 &&
                     <Grid
                         col={4}
                         mdCol={2}
@@ -105,7 +101,7 @@ const Home = () => {
                         gap={20}
                     >
                         {
-                            topProducts.map((item, index) => (
+                            (topProducts ?? []).map((item, index) => (
                                 <ProductCard1
                                     key={index}
                                     product={item}
@@ -125,7 +121,7 @@ const Home = () => {
                     sản phẩm mới
                 </SectionTitle>
                 <SectionBody className="new-product">
-                    {newProducts.length !== 0 &&
+                    {newProducts?.length !== 0 &&
                     <Grid
                         col={4}
                         mdCol={2}
@@ -133,7 +129,7 @@ const Home = () => {
                         gap={20}
                     >
                         {
-                            newProducts.map((item, index) => (
+                            newProducts?.map((item, index) => (
                                 <ProductCard1
                                     key={index}
                                     product={item}
@@ -163,7 +159,7 @@ const Home = () => {
                     Phổ biến
                 </SectionTitle>
                 <SectionBody>
-                    {popularProducts.length !== 0 &&
+                    {popularProducts?.length !== 0 &&
                     <Grid
                         col={4}
                         mdCol={2}
@@ -171,7 +167,7 @@ const Home = () => {
                         gap={20}
                     >
                         {
-                            popularProducts.map((item, index) => (
+                            popularProducts?.map((item, index) => (
                                 <ProductCard1
                                     key={index}
                                     product={item}

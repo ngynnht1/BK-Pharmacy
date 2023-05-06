@@ -45,3 +45,56 @@ export const selectUserOrderDetails = createSelector(
   cartItemsSelector,
   (state) => state.selectedOrder,
 )
+
+export const selectProvinces = createSelector(
+  cartItemsSelector,
+  (state) => state.provinces ?? [],
+)
+
+export const selectDistricts = createSelector(
+  cartItemsSelector,
+  (state) => state.districts ?? [],
+)
+
+export const selectWards = createSelector(
+  cartItemsSelector,
+  (state) => state.wards ?? []
+)
+
+export const selectServices = createSelector(
+  cartItemsSelector,
+  (state) => state.services ?? []
+)
+
+export const selectCalculatedFee = createSelector(
+  cartItemsSelector,
+  (state) => state.calculatedFee
+)
+
+// export const selectSelectedProvince = createSelector(
+//   cartItemsSelector,
+//   (state) => state.selectedProvince,
+// )
+
+export const selectSelectedProvince = createSelector(
+  cartItemsSelector,
+  (state) => state.selectedProvince ? state.provinces.find((p) => p.ProvinceID === parseInt(state.selectedProvince, 10)) : undefined,
+)
+
+export const selectSelectedDistrict = createSelector(
+  cartItemsSelector,
+  // (state) => state.selectedDistrict,
+  (state) => state.selectedDistrict ? state.districts.find((p) => p.DistrictID === parseInt(state.selectedDistrict, 10)) : undefined,
+)
+
+export const selectSelectedWard = createSelector(
+  cartItemsSelector,
+  // (state) => state.selectedWard,
+  (state) => state.selectedWard ? state.wards.find((p) => p.WardCode === state.selectedWard) : undefined,
+)
+
+export const selectSelectedService = createSelector(
+  cartItemsSelector,
+  // (state) => state.selectedService,
+  (state) => state.selectedService ? state.services.find((p) => p.service_id === parseInt(state.selectedService, 10)) : undefined,
+)

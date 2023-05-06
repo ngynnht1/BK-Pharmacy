@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
-import Helmet from '../components/Helmet'
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectDraftOrder
-} from '../redux/shopping-cart/selectors';
+
+import Helmet from '../components/Helmet'
 import {
   createOrder,
 } from '../redux/shopping-cart/actions';
+import {
+  selectDraftOrder
+} from '../redux/shopping-cart/selectors';
 import { useHistory } from "react-router-dom";
 
 const Bill = () => {
@@ -28,7 +29,7 @@ const Bill = () => {
 
   return (
     <Helmet title="deliver">
-      <div clasName="deliver__title">
+      {/* <div clasName="deliver__title">
         <h1>Phương thức vận chuyển</h1>
       </div>
 
@@ -36,7 +37,7 @@ const Bill = () => {
         <input type="checkbox" className="deliver__home__checkbox" />
         <div className="deliver__home__content">Giao hàng tận nơi</div>
         <div className="deliver__home__price">0 đ</div>
-      </div>
+      </div> */}
 
       <div clasName="deliver__title">
         <h1>Phương thức thanh toán</h1>

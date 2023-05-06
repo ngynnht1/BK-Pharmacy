@@ -1,26 +1,24 @@
-import React from 'react'
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 
-import { styled } from "@mui/material/styles";
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import Paper from "@mui/material/Paper";
+import React from 'react'
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-
-import { useSelector } from 'react-redux';
+import numberWithCommas from '../utils/numberWithCommas';
 import {
   selectUserInfo,
 } from '../redux/authentication/selectors';
 import {
   selectUserOrderDetails
 } from '../redux/shopping-cart/selectors';
-import { useHistory } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import { useDispatch } from 'react-redux'
-import numberWithCommas from '../utils/numberWithCommas';
-
+import { useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -114,7 +112,7 @@ const OrderCard = () => {
           <p> paid</p>
           </div>
           <div className="container__delivery__from__name">{user?.name}</div>
-          <div className="container__delivery__from__place">{user?.address}</div>
+          <div className="container__delivery__from__place">{userOrder?.address}</div>
           <div className="container__delivery__from__num">{user?.phone}</div>
       </div>
 
